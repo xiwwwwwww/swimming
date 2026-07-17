@@ -39,7 +39,7 @@ jobs:
       - name: Clone and patch p4a
         run: |
           mkdir -p .buildozer/android/platform
-          git clone --depth 1 --branch develop https://github.com/kivy/python-for-android.git .buildozer/android/platform/python-for-android
+          git clone --depth 1 --branch release-2026.05.09 https://github.com/kivy/python-for-android.git .buildozer/android/platform/python-for-android
           RECIPE=".buildozer/android/platform/python-for-android/pythonforandroid/recipes/libthorvg/__init__.py"
           if [ -f "" ]; then
             sed -i 's/clang_lib_dir = glob(pattern)\[0\]/clang_lib_dirs = glob(pattern); clang_lib_dir = clang_lib_dirs[0] if clang_lib_dirs else None/' ""
