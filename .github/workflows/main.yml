@@ -1,51 +1,68 @@
-﻿name: Build APK
+﻿name: Build Kivy Android APK In Debug Mode
 
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  actions: read
+  checks: read
+
+env:
+  ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+  ANDROID_HOME: /usr/local/lib/android/sdk
+  JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+  CYTHON_LANGUAGE_LEVEL: "3"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.java-home= -Dorg.gradle.jvmargs=-Xmx2048m"
+
 jobs:
-  build:
-    runs-on: ubuntu-22.04
-
+  build-android:
+    runs-on: ubuntu-latest
+ 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
+    - name: Set up Java 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 
-      - name: Install system dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y python3-pip python3-dev build-essential git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev gettext autopoint cython3
-          sudo ln -sf /usr/bin/cython3 /usr/bin/cython
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
 
-      - name: Install Buildozer
-        run: pip3 install buildozer
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git zip unzip python3-pip autoconf automake libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev curl openjdk-17-jdk libltdl-dev
+        sudo apt-get install -y python3-dev build-essential gettext autopoint cython3
+        sudo ln -sf /usr/bin/cython3 /usr/bin/cython
 
-      - name: Build APK
-        run: |
-          buildozer android debug > buildozer.log 2>&1
-          if [ True -ne 0 ] && grep -q "Accept?" buildozer.log; then
-            echo ">>> License not accepted. Adding accept_sdk_license to spec and retrying..."
-            echo "android.accept_sdk_license = True" >> buildozer.spec
-            buildozer android debug > buildozer.log 2>&1
-          fi
+    - name: Install Buildozer and dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install buildozer cython==0.29.33 kivy kivymd python-for-android
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: swimpool-apk
-          path: bin/*.apk
-          retention-days: 30
+    - name: Build APK with Buildozer
+      run: |
+        export PATH="C:\Users\qq198/.local/bin:"
+        echo "android.accept_sdk_license = True" >> buildozer.spec
+        buildozer -v android debug 2>&1 | tee buildozer.log
 
-      - name: Upload build log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-log
-          path: buildozer.log
-          retention-days: 7
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: kivy-app-apk
+        path: bin/*.apk
+        retention-days: 30
+
+    - name: Upload build logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-logs
+        path: buildozer.log
+        retention-days: 7
