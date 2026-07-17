@@ -21,6 +21,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python3-pip python3-dev build-essential git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev gettext autopoint cython3
+          sudo ln -sf /usr/bin/cython3 /usr/bin/cython
 
       - name: Install Buildozer
         run: pip3 install buildozer
