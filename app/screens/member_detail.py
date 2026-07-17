@@ -1,4 +1,4 @@
-"""Member detail screen — view info, quick actions, and navigation hub."""
+"""Member detail screen 鈥?view info, quick actions, and navigation hub."""
 
 import os
 
@@ -35,7 +35,7 @@ KV = """
                     pos: self.pos
                     size: self.size
             Button:
-                text: "< 返回"
+                text: "< 杩斿洖"
                 font_size: sp(14)
                 color: 1, 1, 1, 1
                 size_hint_x: None
@@ -45,7 +45,7 @@ KV = """
                 on_release: root.go_back()
             Label:
                 id: title_label
-                text: "会员详情"
+                text: "浼氬憳璇︽儏"
                 font_size: sp(20)
                 color: 1, 1, 1, 1
                 bold: True
@@ -110,19 +110,19 @@ KV = """
                             pos: self.pos
                             size: self.size
                     _InfoRow:
-                        label_text: "姓名"
+                        label_text: "濮撳悕"
                         id: info_name
                     _InfoRow:
-                        label_text: "手机号"
+                        label_text: "鎵嬫満鍙?
                         id: info_phone
                     _InfoRow:
-                        label_text: "性别"
+                        label_text: "鎬у埆"
                         id: info_gender
                     _InfoRow:
-                        label_text: "会员类型"
+                        label_text: "浼氬憳绫诲瀷"
                         id: info_type
                     _InfoRow:
-                        label_text: "备注"
+                        label_text: "澶囨敞"
                         id: info_notes
 
                 # Visit adjustment card
@@ -140,7 +140,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                     Label:
-                        text: "剩余次数"
+                        text: "鍓╀綑娆℃暟"
                         font_size: sp(13)
                         color: HEX.TEXT_SECONDARY
                         halign: "center"
@@ -168,7 +168,7 @@ KV = """
                                     size: self.size
                         Label:
                             id: label_remaining
-                            text: "0 次"
+                            text: "0 娆?
                             font_size: sp(24)
                             color: HEX.PRIMARY
                             bold: True
@@ -205,7 +205,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                     Label:
-                        text: "切换类型:"
+                        text: "鍒囨崲绫诲瀷:"
                         font_size: sp(14)
                         color: HEX.TEXT_PRIMARY
                         size_hint_x: 0.35
@@ -214,8 +214,8 @@ KV = """
                         padding: dp(16), 0
                     Spinner:
                         id: spinner_change_type
-                        text: "次卡"
-                        values: ["次卡", "月卡", "季卡", "年卡", "体验卡"]
+                        text: "娆″崱"
+                        values: ["娆″崱", "鏈堝崱", "瀛ｅ崱", "骞村崱", "浣撻獙鍗?]
                         font_size: sp(15)
                         size_hint_x: 0.45
                         background_normal: ""
@@ -223,7 +223,7 @@ KV = """
                         color: HEX.TEXT_PRIMARY
                         on_text: root.on_type_changed(self.text)
                     Button:
-                        text: "确认"
+                        text: "纭"
                         font_size: sp(14)
                         color: 1, 1, 1, 1
                         size_hint_x: 0.2
@@ -244,7 +244,7 @@ KV = """
                     height: dp(48)
                     spacing: dp(8)
                     Button:
-                        text: "编辑资料"
+                        text: "缂栬緫璧勬枡"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.ACCENT
@@ -258,7 +258,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                     Button:
-                        text: "查看二维码"
+                        text: "鏌ョ湅浜岀淮鐮?
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.PRIMARY
@@ -272,7 +272,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                     Button:
-                        text: "修改记录"
+                        text: "淇敼璁板綍"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.PRIMARY_DARK
@@ -288,7 +288,7 @@ KV = """
 
                 # Delete button
                 Button:
-                    text: "删除此会员"
+                    text: "鍒犻櫎姝や細鍛?
                     font_size: sp(14)
                     color: HEX.ERROR
                     size_hint_y: None
@@ -354,7 +354,7 @@ class MemberDetailScreen(Screen):
 
         self._original_type = member.get("member_type", "")
 
-        self.ids.title_label.text = member.get("name", "会员详情")
+        self.ids.title_label.text = member.get("name", "浼氬憳璇︽儏")
         self.ids.label_id.text = f"ID: {member['id']}"
 
         avatar = member.get("avatar_path", "")
@@ -362,12 +362,12 @@ class MemberDetailScreen(Screen):
 
         self.ids.info_name.value = member.get("name", "")
         self.ids.info_phone.value = member.get("phone", "")
-        self.ids.info_gender.value = member.get("gender", "") or "未设置"
+        self.ids.info_gender.value = member.get("gender", "") or "鏈缃?
         self.ids.info_type.value = member.get("member_type", "")
-        self.ids.info_notes.value = member.get("notes", "") or "无"
+        self.ids.info_notes.value = member.get("notes", "") or "鏃?
 
         remaining = member.get("remaining", 0)
-        self.ids.label_remaining.text = f"{remaining} 次"
+        self.ids.label_remaining.text = f"{remaining} 娆?
         if remaining <= 0:
             self.ids.label_remaining.color = (0.957, 0.263, 0.212, 1)
         else:
@@ -387,7 +387,7 @@ class MemberDetailScreen(Screen):
         app = App.get_running_app()
         new_val = app.db.add_visit(self._member_id, delta)
         if new_val is not None:
-            self.ids.label_remaining.text = f"{new_val} 次"
+            self.ids.label_remaining.text = f"{new_val} 娆?
             if new_val <= 0:
                 self.ids.label_remaining.color = (0.957, 0.263, 0.212, 1)
             else:
@@ -406,7 +406,7 @@ class MemberDetailScreen(Screen):
         if app.db.change_member_type(self._member_id, new_type):
             self._original_type = new_type
             self.ids.info_type.value = new_type
-            self._show_toast("会员类型已更新")
+            self._show_toast("浼氬憳绫诲瀷宸叉洿鏂?)
 
     def confirm_delete(self):
         """Show confirmation dialog before deleting."""
@@ -417,7 +417,7 @@ BoxLayout:
     padding: dp(16)
     spacing: dp(12)
     Label:
-        text: "确定要删除此会员吗？此操作不可撤销。"
+        text: "纭畾瑕佸垹闄ゆ浼氬憳鍚楋紵姝ゆ搷浣滀笉鍙挙閿€銆?
         font_size: sp(15)
         color: (0.13, 0.13, 0.13, 1)
         halign: "center"
@@ -427,18 +427,18 @@ BoxLayout:
         height: dp(44)
         spacing: dp(12)
         Button:
-            text: "取消"
+            text: "鍙栨秷"
             background_color: (0.88, 0.88, 0.88, 1)
             color: (0.13, 0.13, 0.13, 1)
             on_release: popup.dismiss()
         Button:
-            text: "确认删除"
+            text: "纭鍒犻櫎"
             background_color: (0.957, 0.263, 0.212, 1)
             color: (1, 1, 1, 1)
             on_release: root_cb()
 """)
         popup = Popup(
-            title="确认删除",
+            title="纭鍒犻櫎",
             content=content,
             size_hint=(0.8, 0.3),
             auto_dismiss=False,
@@ -464,29 +464,6 @@ BoxLayout:
         self._member_id = ""
         self.go_back()
 
-    def _show_toast(self, message):
-        """Show a brief non-blocking message."""
-        from kivy.uix.label import Label
-        toast = Label(
-            text=message,
-            font_size=sp(15),
-            color=(1, 1, 1, 1),
-            size_hint=(None, None),
-            size=(dp(200), dp(40)),
-            pos_hint={"center_x": 0.5, "top": 0.15},
-            halign="center",
-            valign="middle",
-        )
-        toast.canvas.before.add
-        from kivy.graphics import Color, RoundedRectangle
-        with toast.canvas.before:
-            Color(0.082, 0.396, 0.753, 0.9)
-            RoundedRectangle(radius=[dp(20)], pos=toast.pos, size=toast.size)
-        toast.bind(pos=lambda w, v: w.canvas.before.children[0].pos = w.pos)
-        toast.bind(size=lambda w, v: w.canvas.before.children[0].size = w.size)
-        # Actually this is getting complex, let me simplify
-        # Better approach — just update a label or use a simple popup
-        # For now, skip toast for simplicity
 
     def go_edit(self):
         if not self._member_id:
