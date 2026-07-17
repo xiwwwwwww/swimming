@@ -17,6 +17,7 @@ android.sdk = 34
 android.gradle_dependencies = 
 android.add_src =
 android.archs = arm64-v8a
+p4a.branch = release-2026.05.09
 ios.kivy_ios_dir = 
 ios.kivy_ios_url = 
 ios.requirements =
