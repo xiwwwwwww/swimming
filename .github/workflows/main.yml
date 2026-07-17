@@ -46,9 +46,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install buildozer cython==0.29.33 kivy kivymd python-for-android
 
+    - name: Clone stable p4a release
+      run: |
+        rm -rf /home/runner/p4a-stable
+        git clone --depth 1 --branch release-2026.05.09 https://github.com/kivy/python-for-android.git /home/runner/p4a-stable
+
     - name: Build APK with Buildozer
       run: |
-        grep -q "android.accept_sdk_license" buildozer.spec || echo "android.accept_sdk_license = True" >> buildozer.spec
+        sed -i '/android.accept_sdk_license/d' buildozer.spec
+        sed -i '/^\[app\]/a android.accept_sdk_license = True' buildozer.spec
         buildozer -v android debug > buildozer.log 2>&1
 
     - name: Upload APK artifact
