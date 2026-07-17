@@ -9,7 +9,7 @@ source.include_exts = py,png,jpg,kv,atlas
 
 version = 1.0.0
 
-requirements = python3,kivy,pillow,qrcode,pyzbar,plyer
+requirements = python3==3.12.8,hostpython3==3.12.8,kivy,pillow,qrcode,pyzbar,plyer
 
 orientation = portrait
 fullscreen = 0
@@ -19,7 +19,6 @@ android.api = 34
 android.minapi = 24
 android.ndk = 25b
 android.arch = arm64-v8a
-p4a.branch = release-2026.05.09
 android.accept_sdk_license = True
 
 [buildozer]
