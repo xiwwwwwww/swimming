@@ -16,7 +16,7 @@ fullscreen = 0
 
 android.permissions = CAMERA
 android.api = 34
-android.minapi = 21
+android.minapi = 24
 android.ndk = 25b
 p4a.branch = develop
 android.accept_sdk_license = True
