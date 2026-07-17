@@ -19,6 +19,7 @@ android.api = 34
 android.minapi = 21
 android.ndk = 25b
 p4a.branch = develop
+android.accept_sdk_license = True
 
 [buildozer]
 
