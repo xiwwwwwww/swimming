@@ -27,7 +27,13 @@ jobs:
         run: pip3 install buildozer
 
       - name: Build APK
-        run: buildozer android debug > buildozer.log 2>&1
+        run: |
+          buildozer android debug > buildozer.log 2>&1
+          if [ True -ne 0 ] && grep -q "Accept?" buildozer.log; then
+            echo ">>> License not accepted. Adding accept_sdk_license to spec and retrying..."
+            echo "android.accept_sdk_license = True" >> buildozer.spec
+            buildozer android debug > buildozer.log 2>&1
+          fi
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
