@@ -20,6 +20,7 @@ android.minapi = 24
 android.ndk = 25b
 android.arch = arm64-v8a
 android.accept_sdk_license = True
+p4a.branch = develop
 
 [buildozer]
 
