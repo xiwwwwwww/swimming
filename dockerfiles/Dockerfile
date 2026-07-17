@@ -4,9 +4,9 @@ ARG CI=false
 ARG PYTHON_VERSION=3.12
 ARG JAVA_VERSION=17
 ENV USER="user"
-ENV HOME_DIR="/home/"
-ENV WORK_DIR="" \
-    PATH="/.local/bin:"
+ENV HOME_DIR="/home/${USER}"
+ENV WORK_DIR="${HOME_DIR}" \
+    PATH="${HOME_DIR}/.local/bin:${PATH}"
 
 RUN apt update -qq > /dev/null && apt install -qq --yes --no-install-recommends \
     locales && \
@@ -27,15 +27,14 @@ RUN apt update -qq > /dev/null && apt install -qq --yes --no-install-recommends 
     libltdl-dev \
     libncurses5-dev \
     libncursesw5-dev \
-    libpython-dev \
     libssl-dev \
     libtool \
     make \
-    openjdk--jdk \
+    openjdk-${JAVA_VERSION}-jdk \
     patch \
     pkg-config \
-    python \
-    python-venv \
+    python${PYTHON_VERSION} \
+    python${PYTHON_VERSION}-venv \
     python3-pip \
     sudo \
     unzip \
@@ -43,19 +42,19 @@ RUN apt update -qq > /dev/null && apt install -qq --yes --no-install-recommends 
     zip \
     zlib1g-dev
 
-RUN useradd --create-home --shell /bin/bash  && \
-    usermod -append --groups sudo  && \
+RUN useradd --create-home --shell /bin/bash ${USER} && \
+    usermod -append --groups sudo ${USER} && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-USER 
-WORKDIR 
+USER ${USER}
+WORKDIR ${WORK_DIR}
 
-RUN python3 -m venv /venv
-ENV PATH="/venv/bin:" \
-    VIRTUAL_ENV="/venv"
+RUN python3 -m venv ${HOME_DIR}/venv
+ENV PATH="${HOME_DIR}/venv/bin:${PATH}" \
+    VIRTUAL_ENV="${HOME_DIR}/venv"
 
 RUN pip install --upgrade buildozer setuptools Cython==0.29.33 cmake
 
-COPY . 
-RUN if [ "" = "true" ]; then sed 's/log_level = [0-9]/log_level = 1/' -i buildozer.spec; fi
+COPY . ${WORK_DIR}
+RUN if [ "${CI}" = "true" ]; then sed 's/log_level = [0-9]/log_level = 1/' -i buildozer.spec; fi
 ENTRYPOINT ["./dockerfiles/start.sh"]
