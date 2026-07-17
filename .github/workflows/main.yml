@@ -19,39 +19,35 @@ jobs:
       - name: Build Docker image
         run: docker build --tag=swimpool-android --file=dockerfiles/Dockerfile .
 
-      - name: Build APK
+      - name: Build APK in container
         id: build
         run: |
           docker run --name swimpool-build --env-file dockerfiles/env.list \
-                     swimpool-android /bin/sh -c "buildozer android debug 2>&1 | tee buildozer.log"
+                     swimpool-android "buildozer android debug" 2>&1 | tee buildozer.log
         timeout-minutes: 120
         continue-on-error: true
 
-      - name: Copy APK from container
+      - name: Extract APK from container
+        if: always()
         run: |
           mkdir -p bin
           docker cp swimpool-build:/home/user/bin/. ./bin/ 2>/dev/null || true
-          ls -la bin/
-
-      - name: Copy build log from container
-        if: always()
-        run: |
-          docker cp swimpool-build:/home/user/buildozer.log ./buildozer.log 2>/dev/null || true
-          docker logs swimpool-build > docker-output.log 2>/dev/null || true
+          echo "=== Files in bin/ ==="
+          ls -la bin/ || echo "bin/ is empty"
 
       - name: Upload APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: swimpool-apk
           path: bin/*.apk
           retention-days: 30
 
-      - name: Upload build log
+      - name: Upload build logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-log
+          name: build-logs
           path: |
             buildozer.log
-            docker-output.log
           retention-days: 7
