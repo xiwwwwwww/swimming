@@ -20,8 +20,8 @@ android.archs = arm64-v8a
 ios.kivy_ios_dir = 
 ios.kivy_ios_url = 
 ios.requirements =
+android.accept_sdk_license = True
 
 [buildozer]
 log_level = 2
 warn_on_root = 1
-android.accept_sdk_license = True
