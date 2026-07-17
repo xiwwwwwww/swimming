@@ -1,4 +1,4 @@
-﻿[app]
+[app]
 
 title = Swim Pool Manager
 package.name = swimpool
