@@ -1,4 +1,4 @@
-﻿name: Build APK
+name: Build APK
 
 on:
   workflow_dispatch:
@@ -36,9 +36,8 @@ jobs:
           pip install cython buildozer
 
       - name: Build APK
-        env:
-          ANDROID_SDK_ACCEPT_LICENSE: "True"
         run: |
+          export ANDROID_SDK_ACCEPT_LICENSE=y
           buildozer -v android debug
 
       - name: Upload APK
