@@ -1,28 +1,26 @@
-[app]
+﻿[app]
+
 title = Swim Pool Manager
 package.name = swimpool
 package.domain = org.local
+
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,ttf
-source.include_patterns = assets/*,data/*
+source.include_exts = py,png,jpg,kv,atlas
+
 version = 1.0.0
+
 requirements = python3,kivy,pillow,qrcode,pyzbar,plyer
+
 orientation = portrait
 fullscreen = 0
-android.permissions = CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
-android.api = 33
-android.minapi = 24
+
+android.permissions = CAMERA
+android.api = 34
+android.minapi = 21
 android.ndk = 25b
-android.sdk = 34
-android.gradle_dependencies = 
-android.add_src =
-android.archs = arm64-v8a
-p4a.source_dir = /home/runner/p4a-stable
-ios.kivy_ios_dir = 
-ios.kivy_ios_url = 
-ios.requirements =
-android.accept_sdk_license = True
+p4a.branch = develop
 
 [buildozer]
+
 log_level = 2
 warn_on_root = 1
