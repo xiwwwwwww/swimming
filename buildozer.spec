@@ -18,7 +18,8 @@ android.permissions = CAMERA
 android.api = 34
 android.minapi = 24
 android.ndk = 25b
-p4a.branch = develop
+android.arch = arm64-v8a
+p4a.branch = release-2026.05.09
 android.accept_sdk_license = True
 
 [buildozer]
