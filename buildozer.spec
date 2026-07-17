@@ -17,7 +17,6 @@ android.sdk = 34
 android.gradle_dependencies = 
 android.add_src =
 android.archs = arm64-v8a
-p4a.branch = release-2026.05.09
 p4a.source_dir = /home/runner/p4a-stable
 ios.kivy_ios_dir = 
 ios.kivy_ios_url = 
