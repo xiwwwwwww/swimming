@@ -20,7 +20,7 @@ Window.softinput_mode = "below_target"
 class SwimPoolApp(App):
     """Main application class for the Swim Pool Membership Manager."""
 
-    title = "泳池会员管理"
+    title = "??????????????????"
 
     def build(self):
         self.db = Database()
