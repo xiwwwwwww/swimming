@@ -9,12 +9,12 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 DB_PATH = os.path.join(DATA_DIR, "swimpool.db")
 
 FIELD_LABELS = {
-    "name": "姓名",
-    "phone": "手机号",
-    "gender": "性别",
-    "member_type": "会员类型",
-    "remaining": "剩余次数",
-    "notes": "备注",
+    "name": "??????",
+    "phone": "?????????",
+    "gender": "??????",
+    "member_type": "????????????",
+    "remaining": "????????????",
+    "notes": "??????",
 }
 
 
@@ -35,7 +35,7 @@ class Database:
                 name        TEXT NOT NULL,
                 phone       TEXT NOT NULL,
                 gender      TEXT DEFAULT '',
-                member_type TEXT DEFAULT '次卡',
+                member_type TEXT DEFAULT '??????',
                 remaining   INTEGER DEFAULT 0,
                 notes       TEXT DEFAULT '',
                 avatar_path TEXT DEFAULT '',
