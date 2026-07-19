@@ -1,4 +1,4 @@
-"""Edit member screen — modify existing member info with change tracking."""
+"""Edit member screen ??? modify existing member info with change tracking."""
 
 import os
 import shutil
@@ -36,7 +36,7 @@ KV = """
                     pos: self.pos
                     size: self.size
             Button:
-                text: "< 返回"
+                text: "< ??????"
                 font_size: sp(14)
                 color: 1, 1, 1, 1
                 size_hint_x: None
@@ -45,7 +45,7 @@ KV = """
                 background_color: 0, 0, 0, 0
                 on_release: root.go_back()
             Label:
-                text: "编辑资料"
+                text: "????????????"
                 font_size: sp(20)
                 color: 1, 1, 1, 1
                 bold: True
@@ -83,7 +83,7 @@ KV = """
                         orientation: "vertical"
                         spacing: dp(4)
                         Label:
-                            text: "会员头像"
+                            text: "????????????"
                             font_size: sp(15)
                             color: HEX.TEXT_PRIMARY
                             bold: True
@@ -91,7 +91,7 @@ KV = """
                             valign: "bottom"
                             size_hint_y: 0.5
                         Label:
-                            text: "点击按钮更换头像"
+                            text: "????????????????????????"
                             font_size: sp(12)
                             color: HEX.TEXT_SECONDARY
                             halign: "left"
@@ -102,7 +102,7 @@ KV = """
                     height: dp(44)
                     spacing: dp(8)
                     Button:
-                        text: "拍照"
+                        text: "??????"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.PRIMARY_LIGHT
@@ -116,7 +116,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                     Button:
-                        text: "从相册选择"
+                        text: "???????????????"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.ACCENT
@@ -130,7 +130,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                 Label:
-                    text: "姓名 *"
+                    text: "?????? *"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -156,7 +156,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                 Label:
-                    text: "手机号 *"
+                    text: "????????? *"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -183,7 +183,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                 Label:
-                    text: "性别"
+                    text: "??????"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -196,9 +196,9 @@ KV = """
                     spacing: dp(8)
                     Button:
                         id: btn_male
-                        text: "男"
+                        text: "???"
                         font_size: sp(15)
-                        on_release: root.set_gender("男")
+                        on_release: root.set_gender("???")
                         canvas.before:
                             Color:
                                 rgba: (0.88, 0.88, 0.88, 1)
@@ -208,9 +208,9 @@ KV = """
                                 size: self.size
                     Button:
                         id: btn_female
-                        text: "女"
+                        text: "???"
                         font_size: sp(15)
-                        on_release: root.set_gender("女")
+                        on_release: root.set_gender("???")
                         canvas.before:
                             Color:
                                 rgba: (0.88, 0.88, 0.88, 1)
@@ -219,7 +219,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                 Label:
-                    text: "备注"
+                    text: "??????"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -244,7 +244,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                 Button:
-                    text: "保存修改"
+                    text: "????????????"
                     font_size: sp(17)
                     bold: True
                     color: 1, 1, 1, 1
@@ -303,12 +303,12 @@ class EditMemberScreen(Screen):
     def _update_gender_buttons(self):
         btn_m = self.ids.btn_male
         btn_f = self.ids.btn_female
-        if self._gender == "男":
+        if self._gender == "???":
             btn_m.background_color = (0.082, 0.396, 0.753, 1)
             btn_m.color = (1, 1, 1, 1)
             btn_f.background_color = (0.88, 0.88, 0.88, 1)
             btn_f.color = (0.13, 0.13, 0.13, 1)
-        elif self._gender == "女":
+        elif self._gender == "???":
             btn_f.background_color = (0.082, 0.396, 0.753, 1)
             btn_f.color = (1, 1, 1, 1)
             btn_m.background_color = (0.88, 0.88, 0.88, 1)
@@ -325,14 +325,14 @@ class EditMemberScreen(Screen):
             filename = os.path.join(AVATAR_DIR, f"photo_{datetime.now().strftime('%Y%m%d%H%M%S')}.jpg")
             camera.take_picture(filename=filename, on_complete=lambda p: self._on_avatar_selected(p))
         except (ImportError, NotImplementedError):
-            self._show_popup("提示", "当前环境不支持拍照功能，请从相册选择图片。")
+            self._show_popup("??????", "???????????????????????????????????????????????????????????????")
 
     def pick_gallery(self):
         try:
             from plyer import filechooser
             filechooser.open_file(on_selection=self._on_gallery_selected, filters=[["Images", "*.jpg", "*.jpeg", "*.png", "*.bmp"]])
         except (ImportError, NotImplementedError):
-            self._show_popup("提示", "当前环境不支持相册功能。")
+            self._show_popup("??????", "????????????????????????????????????")
 
     def _on_gallery_selected(self, selection):
         if selection and len(selection) > 0:
@@ -351,10 +351,10 @@ class EditMemberScreen(Screen):
         name = self.ids.input_name.text.strip()
         phone = self.ids.input_phone.text.strip()
         if not name:
-            self._show_popup("提示", "请输入会员姓名。")
+            self._show_popup("??????", "????????????????????????")
             return
         if not phone:
-            self._show_popup("提示", "请输入手机号。")
+            self._show_popup("??????", "?????????????????????")
             return
         updates = {"name": name, "phone": phone, "gender": self._gender, "notes": self.ids.input_notes.text.strip()}
         if self.avatar_file != self._old_avatar:
@@ -362,9 +362,9 @@ class EditMemberScreen(Screen):
         app = App.get_running_app()
         changed = app.db.update_member(self._member_id, **updates)
         if changed:
-            self._show_popup("成功", f"已保存 {len(changed)} 项修改。")
+            self._show_popup("??????", f"????????? {len(changed)} ????????????")
         else:
-            self._show_popup("提示", "没有检测到任何修改。")
+            self._show_popup("??????", "??????????????????????????????")
 
     def _show_popup(self, title, message):
         content = Builder.load_string("""

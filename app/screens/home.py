@@ -1,4 +1,4 @@
-"""Home screen — member list with search and quick actions."""
+"""Home screen ??? member list with search and quick actions."""
 
 import os
 
@@ -62,7 +62,7 @@ KV = """
             text_size: self.size
             shorten: True
         Label:
-            text: root.member_type + "  ·  ID: " + root.member_id
+            text: root.member_type + "  ??  ID: " + root.member_id
             font_size: sp(12)
             color: HEX.TEXT_SECONDARY
             halign: "left"
@@ -72,14 +72,14 @@ KV = """
         size_hint_x: 0.25
         orientation: "vertical"
         Label:
-            text: str(root.remaining) + "次"
+            text: str(root.remaining) + "???"
             font_size: sp(18)
             color: HEX.PRIMARY if root.remaining > 0 else HEX.ERROR
             bold: True
             halign: "right"
             valign: "middle"
         Label:
-            text: "剩余"
+            text: "??????"
             font_size: sp(11)
             color: HEX.TEXT_SECONDARY
             halign: "right"
@@ -118,7 +118,7 @@ KV = """
                     pos: self.pos
                     size: self.size
             Label:
-                text: "泳池会员管理"
+                text: "??????????????????"
                 font_size: sp(20)
                 color: 1, 1, 1, 1
                 bold: True
@@ -126,7 +126,7 @@ KV = """
                 valign: "middle"
                 size_hint_x: 0.8
             Button:
-                text: "扫码"
+                text: "??????"
                 font_size: sp(14)
                 color: 1, 1, 1, 1
                 size_hint_x: 0.2
@@ -150,7 +150,7 @@ KV = """
             padding: dp(12), dp(6)
             TextInput:
                 id: search_input
-                hint_text: "搜索姓名、手机号或会员ID"
+                hint_text: "?????????????????????????????????ID"
                 font_size: sp(15)
                 multiline: False
                 background_normal: ""
@@ -198,14 +198,14 @@ KV = """
             opacity: 0
             disabled: True
             Label:
-                text: "暂无会员"
+                text: "????????????"
                 font_size: sp(18)
                 color: HEX.TEXT_SECONDARY
                 halign: "center"
                 valign: "bottom"
                 size_hint_y: 0.6
             Label:
-                text: "点击右下角 + 添加第一位会员"
+                text: "??????????????? + ?????????????????????"
                 font_size: sp(14)
                 color: HEX.TEXT_SECONDARY
                 halign: "center"

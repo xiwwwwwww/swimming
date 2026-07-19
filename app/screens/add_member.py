@@ -1,4 +1,4 @@
-"""Add member screen — form for creating a new member record."""
+"""Add member screen ??? form for creating a new member record."""
 
 import os
 import shutil
@@ -42,7 +42,7 @@ KV = """
                     pos: self.pos
                     size: self.size
             Button:
-                text: "< 返回"
+                text: "< ??????"
                 font_size: sp(14)
                 color: 1, 1, 1, 1
                 size_hint_x: None
@@ -51,7 +51,7 @@ KV = """
                 background_color: 0, 0, 0, 0
                 on_release: root.go_back()
             Label:
-                text: "添加会员"
+                text: "????????????"
                 font_size: sp(20)
                 color: 1, 1, 1, 1
                 bold: True
@@ -93,7 +93,7 @@ KV = """
                         orientation: "vertical"
                         spacing: dp(4)
                         Label:
-                            text: "会员头像"
+                            text: "????????????"
                             font_size: sp(15)
                             color: HEX.TEXT_PRIMARY
                             bold: True
@@ -101,7 +101,7 @@ KV = """
                             valign: "bottom"
                             size_hint_y: 0.5
                         Label:
-                            text: "可选，点击下方按钮拍照或选择图片"
+                            text: "????????????????????????????????????????????????"
                             font_size: sp(12)
                             color: HEX.TEXT_SECONDARY
                             halign: "left"
@@ -113,7 +113,7 @@ KV = """
                     height: dp(44)
                     spacing: dp(8)
                     Button:
-                        text: "拍照"
+                        text: "??????"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.PRIMARY_LIGHT
@@ -127,7 +127,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                     Button:
-                        text: "从相册选择"
+                        text: "???????????????"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.ACCENT
@@ -143,7 +143,7 @@ KV = """
 
                 # Name
                 Label:
-                    text: "姓名 *"
+                    text: "?????? *"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -152,7 +152,7 @@ KV = """
                     height: dp(24)
                 TextInput:
                     id: input_name
-                    hint_text: "请输入会员姓名"
+                    hint_text: "?????????????????????"
                     font_size: sp(16)
                     multiline: False
                     size_hint_y: None
@@ -172,7 +172,7 @@ KV = """
 
                 # Phone
                 Label:
-                    text: "手机号 *"
+                    text: "????????? *"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -181,7 +181,7 @@ KV = """
                     height: dp(24)
                 TextInput:
                     id: input_phone
-                    hint_text: "请输入手机号"
+                    hint_text: "??????????????????"
                     font_size: sp(16)
                     multiline: False
                     input_filter: "int"
@@ -202,7 +202,7 @@ KV = """
 
                 # Gender
                 Label:
-                    text: "性别"
+                    text: "??????"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -215,12 +215,12 @@ KV = """
                     spacing: dp(8)
                     Button:
                         id: btn_male
-                        text: "男"
+                        text: "???"
                         font_size: sp(15)
                         background_normal: ""
                         background_color: HEX.PRIMARY
                         color: 1, 1, 1, 1
-                        on_release: root.set_gender("男")
+                        on_release: root.set_gender("???")
                         canvas.before:
                             Color:
                                 rgba: HEX.PRIMARY
@@ -230,12 +230,12 @@ KV = """
                                 size: self.size
                     Button:
                         id: btn_female
-                        text: "女"
+                        text: "???"
                         font_size: sp(15)
                         background_normal: ""
                         background_color: HEX.BACKGROUND
                         color: HEX.TEXT_PRIMARY
-                        on_release: root.set_gender("女")
+                        on_release: root.set_gender("???")
                         canvas.before:
                             Color:
                                 rgba: 0.88, 0.88, 0.88, 1
@@ -246,7 +246,7 @@ KV = """
 
                 # Member type
                 Label:
-                    text: "会员类型"
+                    text: "????????????"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -255,8 +255,8 @@ KV = """
                     height: dp(24)
                 Spinner:
                     id: spinner_type
-                    text: "次卡"
-                    values: ["次卡", "月卡", "季卡", "年卡", "体验卡"]
+                    text: "??????"
+                    values: ["??????", "??????", "??????", "??????", "?????????"]
                     font_size: sp(16)
                     size_hint_y: None
                     height: dp(48)
@@ -273,7 +273,7 @@ KV = """
 
                 # Initial visits
                 Label:
-                    text: "初始次数"
+                    text: "????????????"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -283,7 +283,7 @@ KV = """
                 TextInput:
                     id: input_remaining
                     text: "0"
-                    hint_text: "请输入初始剩余次数"
+                    hint_text: "???????????????????????????"
                     font_size: sp(16)
                     multiline: False
                     input_filter: "int"
@@ -304,7 +304,7 @@ KV = """
 
                 # Notes
                 Label:
-                    text: "备注"
+                    text: "??????"
                     font_size: sp(14)
                     color: HEX.TEXT_PRIMARY
                     bold: True
@@ -313,7 +313,7 @@ KV = """
                     height: dp(24)
                 TextInput:
                     id: input_notes
-                    hint_text: "可选备注信息"
+                    hint_text: "??????????????????"
                     font_size: sp(15)
                     size_hint_y: None
                     height: dp(88)
@@ -332,7 +332,7 @@ KV = """
 
                 # Save button
                 Button:
-                    text: "保存会员信息"
+                    text: "??????????????????"
                     font_size: sp(17)
                     bold: True
                     color: 1, 1, 1, 1
@@ -376,7 +376,7 @@ class AddMemberScreen(Screen):
         self.ids.input_phone.text = ""
         self.ids.input_remaining.text = "0"
         self.ids.input_notes.text = ""
-        self.ids.spinner_type.text = "次卡"
+        self.ids.spinner_type.text = "??????"
         self._update_gender_buttons()
 
     def set_gender(self, gender):
@@ -386,12 +386,12 @@ class AddMemberScreen(Screen):
     def _update_gender_buttons(self):
         btn_m = self.ids.btn_male
         btn_f = self.ids.btn_female
-        if self._gender == "男":
+        if self._gender == "???":
             btn_m.background_color = (0.082, 0.396, 0.753, 1)
             btn_m.color = (1, 1, 1, 1)
             btn_f.background_color = (0.88, 0.88, 0.88, 1)
             btn_f.color = (0.13, 0.13, 0.13, 1)
-        elif self._gender == "女":
+        elif self._gender == "???":
             btn_f.background_color = (0.082, 0.396, 0.753, 1)
             btn_f.color = (1, 1, 1, 1)
             btn_m.background_color = (0.88, 0.88, 0.88, 1)
@@ -412,7 +412,7 @@ class AddMemberScreen(Screen):
                 on_complete=lambda path: self._on_avatar_selected(path),
             )
         except (ImportError, NotImplementedError):
-            self._show_popup("提示", "当前环境不支持拍照功能，请从相册选择图片。")
+            self._show_popup("??????", "???????????????????????????????????????????????????????????????")
 
     def pick_gallery(self):
         """Pick an image from the device gallery."""
@@ -423,7 +423,7 @@ class AddMemberScreen(Screen):
                 filters=[["Images", "*.jpg", "*.jpeg", "*.png", "*.bmp"]],
             )
         except (ImportError, NotImplementedError):
-            self._show_popup("提示", "当前环境不支持相册功能。")
+            self._show_popup("??????", "????????????????????????????????????")
 
     def _on_gallery_selected(self, selection):
         if selection and len(selection) > 0:
@@ -445,13 +445,13 @@ class AddMemberScreen(Screen):
         phone = self.ids.input_phone.text.strip()
 
         if not name:
-            self._show_popup("提示", "请输入会员姓名。")
+            self._show_popup("??????", "????????????????????????")
             return
         if not phone:
-            self._show_popup("提示", "请输入手机号。")
+            self._show_popup("??????", "?????????????????????")
             return
         if len(phone) < 7:
-            self._show_popup("提示", "请输入有效的手机号（至少7位数字）。")
+            self._show_popup("??????", "????????????????????????????????????7???????????????")
             return
 
         member_type = self.ids.spinner_type.text
@@ -474,7 +474,7 @@ class AddMemberScreen(Screen):
         from app.qr_manager import generate_qr_image
         generate_qr_image(mid, save=True)
 
-        self._show_popup("成功", f"会员 {name} 添加成功！\n会员ID: {mid}")
+        self._show_popup("??????", f"?????? {name} ???????????????\n??????ID: {mid}")
 
     def _show_popup(self, title, message):
         content = Builder.load_string("""

@@ -35,7 +35,7 @@ KV = """
                     size: self.size
             Label:
                 id: scan_status
-                text: "将二维码对准扫描区域"
+                text: "??????????????????????????????"
                 font_size: sp(16)
                 color: HEX.TEXT_PRIMARY
                 halign: "center"
@@ -47,7 +47,7 @@ KV = """
                 Widget:
                     size_hint_x: 0.2
                 Button:
-                    text: "返回"
+                    text: "??????"
                     font_size: sp(15)
                     background_normal: ""
                     background_color: HEX.TEXT_SECONDARY
@@ -62,7 +62,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                 Button:
-                    text: "手动输入ID"
+                    text: "????????????ID"
                     font_size: sp(15)
                     background_normal: ""
                     background_color: HEX.PRIMARY
@@ -109,7 +109,7 @@ class ScanScreen(Screen):
             self._scanning = True
             self._scan_event = Clock.schedule_interval(self._analyze_frame, 0.5)
         except Exception:
-            self.ids.scan_status.text = "无法打开摄像头，请使用手动输入。"
+            self.ids.scan_status.text = "????????????????????????????????????????????????"
 
     def _stop_camera(self):
         self._scanning = False
@@ -152,7 +152,7 @@ class ScanScreen(Screen):
                         return
         except ImportError:
             self._stop_camera()
-            self.ids.scan_status.text = "扫描库未安装，请使用手动输入。"
+            self.ids.scan_status.text = "?????????????????????????????????????????????"
         except Exception:
             pass
 
@@ -165,12 +165,12 @@ class ScanScreen(Screen):
             screen.load_member(member_id)
             self.manager.current = "member_detail"
         else:
-            self.ids.scan_status.text = f"未找到会员: {member_id}"
+            self.ids.scan_status.text = f"???????????????: {member_id}"
             Clock.schedule_once(lambda dt: self._restart_scan(), 2)
 
     def _restart_scan(self):
         self._scanning = True
-        self.ids.scan_status.text = "将二维码对准扫描区域"
+        self.ids.scan_status.text = "??????????????????????????????"
 
     def manual_input(self):
         from kivy.uix.textinput import TextInput
@@ -180,14 +180,14 @@ BoxLayout:
     padding: dp(16)
     spacing: dp(12)
     Label:
-        text: "请输入会员ID或手机号"
+        text: "???????????????ID????????????"
         font_size: sp(14)
         color: (0.13, 0.13, 0.13, 1)
         halign: "center"
         valign: "middle"
     TextInput:
         id: manual_id_input
-        hint_text: "如 SP000001 或手机号"
+        hint_text: "??? SP000001 ????????????"
         font_size: sp(16)
         multiline: False
         size_hint_y: None
@@ -197,14 +197,14 @@ BoxLayout:
         height: dp(44)
         spacing: dp(12)
         Button:
-            text: "取消"
+            text: "??????"
             on_release: popup.dismiss()
         Button:
-            text: "查询"
+            text: "??????"
             on_release: root_callback(manual_id_input.text)
 """)
         popup = Popup(
-            title="手动查询",
+            title="????????????",
             content=content,
             size_hint=(0.85, 0.35),
             auto_dismiss=False,
@@ -226,7 +226,7 @@ BoxLayout:
                 screen.load_member(member["id"])
                 self.manager.current = "member_detail"
             else:
-                self.ids.scan_status.text = "未找到匹配的会员"
+                self.ids.scan_status.text = "????????????????????????"
 
         content.root_callback = do_search
         content.popup = popup

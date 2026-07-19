@@ -30,7 +30,7 @@ KV = """
                     pos: self.pos
                     size: self.size
             Button:
-                text: "< 返回"
+                text: "< ??????"
                 font_size: sp(14)
                 color: 1, 1, 1, 1
                 size_hint_x: None
@@ -39,7 +39,7 @@ KV = """
                 background_color: 0, 0, 0, 0
                 on_release: root.go_back()
             Label:
-                text: "会员二维码"
+                text: "???????????????"
                 font_size: sp(20)
                 color: 1, 1, 1, 1
                 bold: True
@@ -92,7 +92,7 @@ KV = """
                 size_hint_y: None
                 height: dp(24)
             Label:
-                text: "请让工作人员扫描此二维码"
+                text: "????????????????????????????????????"
                 font_size: sp(13)
                 color: HEX.TEXT_SECONDARY
                 halign: "center"

@@ -30,7 +30,7 @@ KV = """
                     pos: self.pos
                     size: self.size
             Button:
-                text: "< 返回"
+                text: "< ??????"
                 font_size: sp(14)
                 color: 1, 1, 1, 1
                 size_hint_x: None
@@ -39,7 +39,7 @@ KV = """
                 background_color: 0, 0, 0, 0
                 on_release: root.go_back()
             Label:
-                text: "修改记录"
+                text: "????????????"
                 font_size: sp(20)
                 color: 1, 1, 1, 1
                 bold: True
@@ -63,13 +63,13 @@ class HistoryScreen(Screen):
 
     _member_id = ""
     FIELD_LABELS = {
-        "name": "姓名",
-        "phone": "手机号",
-        "gender": "性别",
-        "member_type": "会员类型",
-        "remaining": "剩余次数",
-        "notes": "备注",
-        "avatar_path": "头像",
+        "name": "??????",
+        "phone": "?????????",
+        "gender": "??????",
+        "member_type": "????????????",
+        "remaining": "????????????",
+        "notes": "??????",
+        "avatar_path": "??????",
     }
 
     def __init__(self, **kwargs):
@@ -98,7 +98,7 @@ BoxLayout:
     size_hint_y: None
     height: dp(120)
     Label:
-        text: "暂无修改记录"
+        text: "??????????????????"
         font_size: sp(16)
         color: HEX.TEXT_SECONDARY
         halign: "center"
@@ -108,8 +108,8 @@ BoxLayout:
             return
         for log_entry in logs:
             field_cn = self.FIELD_LABELS.get(log_entry["field_name"], log_entry["field_name"])
-            old_val = log_entry.get("old_value", "") or "(空)"
-            new_val = log_entry.get("new_value", "") or "(空)"
+            old_val = log_entry.get("old_value", "") or "(???)"
+            new_val = log_entry.get("new_value", "") or "(???)"
             timestamp = log_entry.get("timestamp", "")
             # Build entry card
             card = Builder.load_string("""
