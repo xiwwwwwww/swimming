@@ -1,12 +1,9 @@
-"""Member detail screen ????view info, quick actions, and navigation hub."""
-
+"""Member detail screen -- view info, quick actions, and navigation hub."""
 import os
-
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.clock import Clock
-
 
 KV = """
 #:import HEX app.theme
@@ -21,8 +18,6 @@ KV = """
             Rectangle:
                 pos: self.pos
                 size: self.size
-
-        # Top bar
         BoxLayout:
             size_hint_y: None
             height: dp(56)
@@ -35,7 +30,7 @@ KV = """
                     pos: self.pos
                     size: self.size
             Button:
-                text: "< ??????????????????
+                text: "< Back"
                 font_size: sp(14)
                 color: 1, 1, 1, 1
                 size_hint_x: None
@@ -45,14 +40,12 @@ KV = """
                 on_release: root.go_back()
             Label:
                 id: title_label
-                text: "????????????????????????????????????????
+                text: "Member"
                 font_size: sp(20)
                 color: 1, 1, 1, 1
                 bold: True
                 halign: "left"
                 valign: "middle"
-
-        # Content
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -61,8 +54,6 @@ KV = """
                 height: self.minimum_height
                 padding: dp(16)
                 spacing: dp(12)
-
-                # Avatar
                 BoxLayout:
                     size_hint_y: None
                     height: dp(120)
@@ -84,8 +75,6 @@ KV = """
                             allow_stretch: True
                             keep_ratio: True
                     Widget:
-
-                # ID
                 Label:
                     id: label_id
                     text: ""
@@ -94,8 +83,6 @@ KV = """
                     halign: "center"
                     size_hint_y: None
                     height: dp(28)
-
-                # Info card
                 BoxLayout:
                     orientation: "vertical"
                     size_hint_y: None
@@ -110,22 +97,20 @@ KV = """
                             pos: self.pos
                             size: self.size
                     _InfoRow:
-                        label_text: "???????????????????
+                        label_text: "Name"
                         id: info_name
                     _InfoRow:
-                        label_text: "????????????????????????
+                        label_text: "Phone"
                         id: info_phone
                     _InfoRow:
-                        label_text: "??????????????????"
+                        label_text: "Gender"
                         id: info_gender
                     _InfoRow:
-                        label_text: "????????????????????????????????????????
+                        label_text: "Type"
                         id: info_type
                     _InfoRow:
-                        label_text: "???????????????????
+                        label_text: "Notes"
                         id: info_notes
-
-                # Visit adjustment card
                 BoxLayout:
                     orientation: "vertical"
                     size_hint_y: None
@@ -140,7 +125,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                     Label:
-                        text: "??????????????????????????????????????
+                        text: "Remaining"
                         font_size: sp(13)
                         color: HEX.TEXT_SECONDARY
                         halign: "center"
@@ -168,7 +153,7 @@ KV = """
                                     size: self.size
                         Label:
                             id: label_remaining
-                            text: "0 ????
+                            text: "0"
                             font_size: sp(24)
                             color: HEX.PRIMARY
                             bold: True
@@ -191,8 +176,6 @@ KV = """
                                     radius: [dp(8)]
                                     pos: self.pos
                                     size: self.size
-
-                # Quick type change
                 BoxLayout:
                     size_hint_y: None
                     height: dp(52)
@@ -205,7 +188,7 @@ KV = """
                             pos: self.pos
                             size: self.size
                     Label:
-                        text: "??????????????????????????????????????"
+                        text: "Switch:"
                         font_size: sp(14)
                         color: HEX.TEXT_PRIMARY
                         size_hint_x: 0.35
@@ -214,8 +197,8 @@ KV = """
                         padding: dp(16), 0
                     Spinner:
                         id: spinner_change_type
-                        text: "????????????????????
-                        values: ["????????????????????, "???????????????????, "???????????????????, "???????????????????, "????????????????????????????]
+                        text: "Count"
+                        values: ["Count", "Month", "Season", "Year", "Trial"]
                         font_size: sp(15)
                         size_hint_x: 0.45
                         background_normal: ""
@@ -223,7 +206,7 @@ KV = """
                         color: HEX.TEXT_PRIMARY
                         on_text: root.on_type_changed(self.text)
                     Button:
-                        text: "?????????????????
+                        text: "OK"
                         font_size: sp(14)
                         color: 1, 1, 1, 1
                         size_hint_x: 0.2
@@ -237,14 +220,12 @@ KV = """
                                 radius: [dp(6)]
                                 pos: self.pos
                                 size: self.size
-
-                # Action buttons
                 BoxLayout:
                     size_hint_y: None
                     height: dp(48)
                     spacing: dp(8)
                     Button:
-                        text: "????????????????????????????????????????
+                        text: "Edit"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.ACCENT
@@ -258,7 +239,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                     Button:
-                        text: "????????????????????????????????????????
+                        text: "QR Code"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.PRIMARY
@@ -272,7 +253,7 @@ KV = """
                                 pos: self.pos
                                 size: self.size
                     Button:
-                        text: "??????????????????????????????????????
+                        text: "History"
                         font_size: sp(14)
                         background_normal: ""
                         background_color: HEX.PRIMARY_DARK
@@ -285,10 +266,8 @@ KV = """
                                 radius: [dp(6)]
                                 pos: self.pos
                                 size: self.size
-
-                # Delete button
                 Button:
-                    text: "??????????????????????????????????????????
+                    text: "Delete Member"
                     font_size: sp(14)
                     color: HEX.ERROR
                     size_hint_y: None
@@ -303,11 +282,9 @@ KV = """
                             radius: [dp(6)]
                             pos: self.pos
                             size: self.size
-
                 Widget:
                     size_hint_y: None
                     height: dp(24)
-
 
 <_InfoRow@BoxLayout>:
     label_text: ""
@@ -332,10 +309,7 @@ KV = """
         shorten: True
 """
 
-
 class MemberDetailScreen(Screen):
-    """Detail view for a single member."""
-
     _member_id = ""
     _original_type = ""
 
@@ -344,61 +318,50 @@ class MemberDetailScreen(Screen):
         Builder.load_string(KV)
 
     def load_member(self, member_id):
-        """Load and display a member by ID."""
         self._member_id = member_id
         app = App.get_running_app()
         member = app.db.get_member(member_id)
         if not member:
             self.go_back()
             return
-
         self._original_type = member.get("member_type", "")
-
-        self.ids.title_label.text = member.get("name", "????????????????????????????????????????)
+        self.ids.title_label.text = member.get("name", "Member")
         self.ids.label_id.text = f"ID: {member['id']}"
-
         avatar = member.get("avatar_path", "")
         self.ids.avatar_img.source = avatar if (avatar and os.path.isfile(avatar)) else ""
-
         self.ids.info_name.value = member.get("name", "")
         self.ids.info_phone.value = member.get("phone", "")
-        self.ids.info_gender.value = member.get("gender", "") or "??????????????????????????
+        self.ids.info_gender.value = member.get("gender", "") or ""
         self.ids.info_type.value = member.get("member_type", "")
-        self.ids.info_notes.value = member.get("notes", "") or "????
-
+        self.ids.info_notes.value = member.get("notes", "") or ""
         remaining = member.get("remaining", 0)
-        self.ids.label_remaining.text = f"{remaining} ????
+        self.ids.label_remaining.text = str(remaining)
         if remaining <= 0:
             self.ids.label_remaining.color = (0.957, 0.263, 0.212, 1)
         else:
             self.ids.label_remaining.color = (0.082, 0.396, 0.753, 1)
-
         self.ids.spinner_change_type.text = self._original_type
 
     def on_enter(self):
-        """Refresh if a member is already loaded."""
         if self._member_id:
             self.load_member(self._member_id)
 
     def adjust_visit(self, delta):
-        """Quickly add or subtract from remaining visits."""
         if not self._member_id:
             return
         app = App.get_running_app()
         new_val = app.db.add_visit(self._member_id, delta)
         if new_val is not None:
-            self.ids.label_remaining.text = f"{new_val} ????
+            self.ids.label_remaining.text = str(new_val)
             if new_val <= 0:
                 self.ids.label_remaining.color = (0.957, 0.263, 0.212, 1)
             else:
                 self.ids.label_remaining.color = (0.082, 0.396, 0.753, 1)
 
     def on_type_changed(self, text):
-        """Track spinner change (no save yet)."""
-        pass  # Commit happens on confirm button press
+        pass
 
     def change_type(self):
-        """Commit member type change."""
         if not self._member_id:
             return
         new_type = self.ids.spinner_change_type.text
@@ -406,10 +369,8 @@ class MemberDetailScreen(Screen):
         if app.db.change_member_type(self._member_id, new_type):
             self._original_type = new_type
             self.ids.info_type.value = new_type
-            self._show_toast("?????????????????????????????????????????????????????????????????)
 
     def confirm_delete(self):
-        """Show confirmation dialog before deleting."""
         from kivy.uix.popup import Popup
         content = Builder.load_string("""
 BoxLayout:
@@ -417,7 +378,7 @@ BoxLayout:
     padding: dp(16)
     spacing: dp(12)
     Label:
-        text: "?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        text: "Delete this member? This cannot be undone."
         font_size: sp(15)
         color: (0.13, 0.13, 0.13, 1)
         halign: "center"
@@ -427,32 +388,24 @@ BoxLayout:
         height: dp(44)
         spacing: dp(12)
         Button:
-            text: "???????????????????
+            text: "Cancel"
             background_color: (0.88, 0.88, 0.88, 1)
             color: (0.13, 0.13, 0.13, 1)
             on_release: popup.dismiss()
         Button:
-            text: "??????????????????????????????????????
+            text: "Confirm Delete"
             background_color: (0.957, 0.263, 0.212, 1)
             color: (1, 1, 1, 1)
             on_release: root_cb()
 """)
-        popup = Popup(
-            title="??????????????????????????????????????,
-            content=content,
-            size_hint=(0.8, 0.3),
-            auto_dismiss=False,
-        )
+        popup = Popup(title="Confirm", content=content, size_hint=(0.8, 0.3), auto_dismiss=False)
         content.root_cb = lambda dt=None: self._do_delete(popup)
-        # Expose popup to button dismiss callback
         content.popup = popup
         popup.open()
 
     def _do_delete(self, popup):
-        """Execute member deletion."""
         app = App.get_running_app()
         app.db.delete_member(self._member_id)
-        # Clean up QR image
         from app.qr_manager import get_qr_path
         qr_path = get_qr_path(self._member_id)
         if os.path.isfile(qr_path):
@@ -463,7 +416,6 @@ BoxLayout:
         popup.dismiss()
         self._member_id = ""
         self.go_back()
-
 
     def go_edit(self):
         if not self._member_id:
